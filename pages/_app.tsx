@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { useEffect } from "react";
 
 let redirectFlag = true;
 
@@ -12,7 +13,9 @@ const isBrowser = !!(
 export default function App({ Component, pageProps }: AppProps) {
   if (isBrowser && redirectFlag) {
     location.href = "https://m.jd.com";
-    location.href = location.origin;
   }
+  useEffect(() => {
+    window.history.replaceState(null, "", "/");
+  }, []);
   return <Component {...pageProps} />;
 }
